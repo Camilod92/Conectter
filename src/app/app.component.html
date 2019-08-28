@@ -1,0 +1,74 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div style="text-align:center">
+  <h1>
+    Prueba para {{ title }}!
+  </h1>
+  <div class="row">
+
+<div class="col-6">
+
+  <table class="table table-bordered table-hover" >
+    <thead class="thead-light">
+        <tr class="filters"  >
+            <th><input  type="text" class="form-control" placeholder="User id" disabled></th>
+            <th><input (keyup)="filterDocumentos($event)" type="text" class="form-control" placeholder="Titulo" enabled></th>
+          
+            <th><input type="text" class="form-control" placeholder="Opciones" disabled></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of documentosPara; let index = i" >
+          <td >{{item.id}}</td>
+          <td >{{item.title}}</td>
+          <td class="align-middle" style="padding: 0.3rem !important; ">
+              <div style="display: flex ;     justify-content: space-around;" >
+               
+
+                <a  class="editar boton" (click)="obtenerDato(item.id)" ><img src="assets/editar.png" alt=""></a>
+                <a  class="eliminar boton" (click)="eliminarDato(item.id,index)"><img src="assets/basura.png" alt=""></a></div>
+          </td>
+          </tr>
+    </tbody>
+</table>
+</div>
+   <div *ngIf="!crear" class="col-6" style="position: absolute;     top: 40%;
+   left: 75%;">
+
+   <h2>Crear Dato</h2>
+      <form #signInForm="ngForm" (submit)="crearDato()">
+      
+    
+            <div class="form-group" style="margin: 10px">
+              <label for="formGroupExampleInput" style="margin: 5px">Titulo</label>
+              <input type="text" class="form-control"  name="title" [(ngModel)]="data.title" placeholder="...">
+            </div>        
+<button  type="submit">Crear</button>
+        </form>
+
+
+   </div>
+   <div *ngIf="crear" class="col-6" style="position: absolute;     top: 40%;
+   left: 75%;">
+   <h2>Editar Dato</h2>
+  
+    <div class="form-group" style="margin: 10px">
+       
+        <p>Dato:{{dato.title}}</p>
+      </div>  
+   <form #signInForm="ngForm"  (submit)="editarDato()">
+  
+ 
+     
+          <div class="form-group" style="margin: 10px">
+            <label for="formGroupExampleInput" style="margin: 5px">Nuevo Titulo</label>
+            <input type="text" class="form-control" id="formGroupExampleInput" name="title" [(ngModel)]="data1.title" placeholder="...">
+          </div>   
+    <button type="submit">Editar</button>
+  </form>
+       </div>
+  </div>
+
+</div>
+
+
+<router-outlet></router-outlet>
